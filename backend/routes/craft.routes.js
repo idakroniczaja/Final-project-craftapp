@@ -1,41 +1,85 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
+const jwt = require('jsonwebtoken')
  
 const Craft = require('../models/Craft-model');
 const Step = require('../models/Step-model');
+const User = require('../models/User-model');
 
-///////////////////////////////////
-////////GET ALL CRAFTS/////////
-///////////////////////////////////
-router.get('/crafts', (req, res, next) => {
-  Craft.find()
-  .populate('steps')
+
+
+function authorize(req, res, next){
+  let token = req.headers['authorisation'].split(' ')[1];
+  if(token != 'null'){
+    jwt.verify(token, 'secret key', async(err,data)=>{
+      if(!err){
+        res.locals.user = data.user
+        next()
+      }else {console.error(err)}
+    })
+  }else {
+    res.status(403).json({message:'Must be logged in'})
+  }
+}
+  
+  
+  ///////////////////////////////////
+  ////////GET ALL CRAFTS/////////
+  ///////////////////////////////////
+  router.get('/crafts', (req, res, next) => {
+    Craft.find()
+    .populate('steps')
     .then(craftsFromDB => {
-      console.log(craftsFromDB)
+    
       res.json(craftsFromDB)
     })
     .catch(err => res.json(err));
-});
- 
+  });
+  
+  ///////////////////////////////////
+  ////////GET my CRAFTS/////////
+  ///////////////////////////////////
+  
+  router.get('/myCrafts', authorize, (req, res, next) => {
+   
+  // let token = req.headers['authorisation'].split(' ')[1];
+   
+    //jwt.verify(token, 'secret key', async (err,data)=>{
+  Craft.find({userId : res.locals.user._id})
+  .then(allCrafts=>{
+    res.json(allCrafts)
+  })
+ //  })
+  });
+
 ///////////////////////////////////
 ////////CREATE A NEW CRAFT/////////
 ///////////////////////////////////
-router.post('/crafts/create', (req, res, next) => {
-  const { title, description } = req.body;
- 
+router.post('/crafts/create', authorize, (req, res, next) => {
 
-  Craft.create({
-    title,
-    description,
-    tasks: []
-  })
+   const { title, description, imageUrl} = req.body;
+//console.log(req.headers)
+  // let token = req.headers['authorisation'].split(' ')[1];
+  // console.log(token)
+ 
+  //jwt.verify(token, 'secret key', async(err,data)=>{
+    Craft.create({
+      title,
+      description,
+      imageUrl,
+      tasks: [],
+      userId: res.locals.user._id,
+    })
     .then(createdCraft => {
+      console.log(createdCraft)
       res.status(200).json(createdCraft);
     })
     .catch(err => {
       res.json(err);
     });
+ //})
+
 });
 
 
@@ -76,6 +120,7 @@ router.delete('/crafts/:id', (req, res, next) => {
     res.json(error);
   });
 });
+
 
 
 ///////////////////////////////////
