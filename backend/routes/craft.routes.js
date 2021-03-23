@@ -76,7 +76,7 @@ router.post('/crafts/create', authorize, (req, res, next) => {
       res.status(200).json(createdCraft);
     })
     .catch(err => {
-      res.json(err);
+      res.json(`Must be logged in`, err);
     });
  //})
 
@@ -106,7 +106,7 @@ router.put('/crafts/:id', (req, res, next) => {
 ///////////////////////////////////
 ////////DELETE CRAFT/////////
 ///////////////////////////////////
-router.delete('/crafts/:id', (req, res, next) => {
+router.delete('/crafts/:id', authorize, (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     res.status(400).json({ message: 'Specified id is not valid' });
     return;
