@@ -50,17 +50,23 @@ router.post("/comments", authorize, (req, res, next) => {
   });
   
 ///////////////////////////////////
-////////RETRIEVE COMMENTS/////////
+////////DELETE COMMENTS/////////
 ///////////////////////////////////
-router.get("/crafts/:id/comments/:commentId", (req, res, next) => {
-    Comment.findById(req.params.commentId)
-      .then((comment) => {
-        res.json(comment);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
-  });
+router.delete("/comments/:id", (req, res, next) => {
+  console.log(req.params);
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(400).json({ message: 'Specified id is not valid' });
+      return;
+    }
+    Comment.findByIdAndRemove(req.params.id)
+    .then(()=>{
+      //   console.log(`req params --- ${req.params.stepId}`)
+        res.json({message:`Comment with ${req.params.id} is removed successfully.`})
+    })
+    .catch(err=> {
+        res.json(err)
+    });
+});
   
 
 

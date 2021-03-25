@@ -79,7 +79,7 @@ router.post('/crafts/create', authorize, (req, res, next) => {
       res.status(200).json(createdCraft);
     })
     .catch(err => {
-      res.json(`Must be logged in`, err);
+      res.json(err);
     });
  //})
 
@@ -145,6 +145,8 @@ router.get('/crafts/:id', (req, res, next) => {
       res.json(error);
     });
 });
+
+
 
 
 

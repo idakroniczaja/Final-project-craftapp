@@ -2,9 +2,24 @@ const { response } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
+const jwt = require('jsonwebtoken')
 
 const Craft = require("../models/Craft-model");
 const Step = require("../models/Step-model");
+
+function authorize(req, res, next){
+  let token = req.headers['authorisation'].split(' ')[1];
+  if(token != 'null'){
+    jwt.verify(token, 'secret key', async(err,data)=>{
+      if(!err){
+        res.locals.user = data.user
+        next()
+      }else {console.error(err)}
+    })
+  }else {
+    res.status(403).json({message:'Must be logged in'})
+  }
+}
 
 ///////////////////////////////////
 ////////CREATE NEW STEP/////////
