@@ -30,6 +30,7 @@ function authorize(req, res, next){
   router.get('/crafts', (req, res, next) => {
     Craft.find()
     .populate('steps')
+    .populate('comments')
     .then(craftsFromDB => {
     
       res.json(craftsFromDB)
@@ -68,11 +69,13 @@ router.post('/crafts/create', authorize, (req, res, next) => {
       title,
       description,
       imageUrl,
-      tasks: [],
+      steps: [],
+      comments: [],
       userId: res.locals.user._id,
     })
     .then(createdCraft => {
-      console.log(createdCraft)
+      console.log(res.locals.user)
+      // console.log(createdCraft)
       res.status(200).json(createdCraft);
     })
     .catch(err => {
@@ -134,6 +137,7 @@ router.get('/crafts/:id', (req, res, next) => {
  
   Craft.findById(req.params.id)
     .populate('steps')
+    .populate('comments')
     .then(craft => {
       res.status(200).json(craft);
     })

@@ -7,6 +7,7 @@ const craftSchema = new Schema({
   description: {type: String, required: true},
   steps: [{ type: Schema.Types.ObjectId, ref: 'Step' }],
   userId: {type: Schema.Types.ObjectId, ref: 'User'},
+  comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 });
  
 const Craft = mongoose.model('Craft', craftSchema);

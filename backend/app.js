@@ -58,7 +58,10 @@ app.use(
 app.use('/', require('./routes/index.routes'));
 app.use('/api', require('./routes/craft.routes'));
 app.use('/api', require('./routes/step.routes'));
-app.use('/api', require('./routes/file-upload.routes'))
+app.use('/api', require('./routes/file-upload.routes'));
+app.use('/api', require('./routes/comment.routes'));
+
+
 const authRoutes = require('./routes/auth.routes');
 app.use('/api', authRoutes);
 
