@@ -8,7 +8,11 @@ const craftSchema = new Schema({
   steps: [{ type: Schema.Types.ObjectId, ref: 'Step' }],
   userId: {type: Schema.Types.ObjectId, ref: 'User'},
   comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
-});
+},
+{
+  timestamps: true
+}
+);
  
 const Craft = mongoose.model('Craft', craftSchema);
  

@@ -5,7 +5,11 @@ const stepSchema = new Schema({
   title: String,
   description: String,
   craft: { type: Schema.Types.ObjectId, ref: 'Craft' }
-});
+}, 
+{
+  timestamps: true
+}
+);
  
 const Step = mongoose.model('Step', stepSchema);
  

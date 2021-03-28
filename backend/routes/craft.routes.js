@@ -44,14 +44,12 @@ function authorize(req, res, next){
   
   router.get('/myCrafts', authorize, (req, res, next) => {
    
-  // let token = req.headers['authorisation'].split(' ')[1];
-   
-    //jwt.verify(token, 'secret key', async (err,data)=>{
+
   Craft.find({userId : res.locals.user._id})
   .then(allCrafts=>{
     res.json(allCrafts)
   })
- //  })
+ 
   });
 
 ///////////////////////////////////
@@ -60,11 +58,7 @@ function authorize(req, res, next){
 router.post('/crafts/create', authorize, (req, res, next) => {
 
    const { title, description, imageUrl} = req.body;
-//console.log(req.headers)
-  // let token = req.headers['authorisation'].split(' ')[1];
-  // console.log(token)
- 
-  //jwt.verify(token, 'secret key', async(err,data)=>{
+
     Craft.create({
       title,
       description,
@@ -75,7 +69,6 @@ router.post('/crafts/create', authorize, (req, res, next) => {
     })
     .then(createdCraft => {
       console.log(res.locals.user)
-      // console.log(createdCraft)
       res.status(200).json(createdCraft);
     })
     .catch(err => {
