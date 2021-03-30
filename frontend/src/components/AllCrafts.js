@@ -25,26 +25,39 @@ class AllCrafts extends React.Component {
         //   <img src={each.imageUrl} alt={each.title} width="200vw" />
         //   <p>{each.comments.length}</p>
         // </li>
-        <div class="col-md-6 col-xl-4 single-blog" style={{padding:'20px'}}>
-        <div class="single-category">
-            <div class="thumb">
-                <img class="img-fluid" src={each.imageUrl} alt=""/>
-            </div>
-            <div class="short_details" style={{boxShadow:'5px 10px #FF8888 ', height:'20vh'}}>
-                <div class="meta-top d-flex">
-                <Link to={`/crafts/${each._id}`}>{each.title}</Link>
-                    <p> /{each.updatedAt || each.createdAt}</p>
-                </div>
-                <a class="d-block" href="single-blog.html">
-                    <h4>{each.title.split('')[0].toUpperCase()+each.title.slice(1)}</h4>
-                </a>
-                <div class="meta-bottom d-flex">
-                    <p><i class="ti-comment"></i>{each.comments.length}</p>
+
+
+    //     <div class="col-md-6 col-xl-4 single-blog" style={{padding:'20px'}}>
+    //     <div class="single-category">
+    //         <div class="thumb">
+    //             <img class="img-fluid" src={each.imageUrl} alt=""/>
+    //         </div>
+    //         <div class="short_details" style={{boxShadow:'5px 10px #FF8888 ', height:'20vh'}}>
+    //             <div class="meta-top d-flex">
+    //           {each.title}
+    //                 <p> {each.createdAt}</p>
+    //             </div>
+    //             <a class="d-block" href="single-blog.html">
+    //             <Link to={`/crafts/${each._id}`}><h4>{each.title.split('')[0].toUpperCase()+each.title.slice(1)}</h4></Link>
+    //             </a>
+    //             <div class="meta-bottom d-flex">
+    //                 <p><i class="ti-comment"></i>{each.comments.length}</p>
                 
-                </div>
-            </div>
-        </div> 
-    </div>
+    //             </div>
+    //         </div>
+    //     </div> 
+    // </div>
+
+    <div key={each._id} className='gridBox'>
+
+
+<Link to={`/crafts/${each._id}`}><img src={each.imageUrl} style={{borderRadius:'5px'}}/></Link>
+    
+    <h3 style={{marginTop:'4vh', color:'gray'}}>{each.title.split('')[0].toUpperCase()+each.title.slice(1)}</h3>
+
+      <p class="ti-comment">   {each.comments.length}</p>
+      </div>
+
       );
     });
   };
@@ -85,22 +98,17 @@ class AllCrafts extends React.Component {
                                 </button>
                             </div>
                         </div>
-                    
                     </form>
             </div>
-          <div className="container">
-            <div className="row ">
-
-                {this.showAll()}
-
-                <div className="col-12 text-center area-padding">
-                    <a href="" className="main_btn">Load More <span className="ti-angle-double-right"></span></a>
-                </div>
-            </div>
-
-          </div>
 
         </section>
+         
+            <div className="gridContainer" >
+                {this.showAll()}
+              
+            </div>
+
+   
 
        
           

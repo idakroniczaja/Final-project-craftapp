@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  
 }
 
 .App-logo {
@@ -24,3 +25,57 @@
   }
 }
 
+.gridContainer{
+  width: 1200px;
+  margin: 20px auto;
+  columns: 4;
+  column-gap: 5px;
+
+}
+
+.gridContainer .gridBox {
+  width: 100%;
+  margin: 0 0 20px;
+  padding: 10px;
+  background: #fff;
+  overflow: hidden;
+  break-inside: avoid;
+  /* box-shadow: 1px 1px 10px #FF8888; */
+}
+
+.gridContainer .gridBox img{
+  max-width: 100%;
+}
+.gridContainer .gridBox h2{
+  margin: 5px 0 0;
+  padding: 0;
+  font-size: 20px;
+}
+
+.gridContainer .gridBox p{
+  margin: 0;
+  padding: 0 0 5;
+  font-size: 16px;
+}
+@media (max-width: 1200px){
+  .gridContainer{
+    columns: 3;
+    width: calc(100%-40px);
+    box-sizing: border-box;
+    padding: 20px 20px 20px 0;
+  }
+}
+
+@media (max-width: 768px){
+  .gridContainer{
+    columns: 2;
+
+  }
+}
+
+@media (max-width: 480px){
+  .gridContainer{
+    columns: 1;
+    
+  }
+}

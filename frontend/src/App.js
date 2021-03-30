@@ -56,7 +56,7 @@ setUser = (user) =>{
                 </div>
                 <div className="col-6 col-lg-4 col-md-6 col-sm-6 logo-wrapper">
                     <a href="index.html" className="logo"/>
-                        <p style={{fontSize:'7vh'}}>Creative<span style={{color:'#FF8888'}}>N</span>ess</p>
+                        <p style={{fontSize:'7vh', fontFamily: "Bradley Hand"}}>Creative<span style={{color:'#FF8888'}}>N</span>ess</p>
                 </div>
                 <div className="col-lg-4 col-md-6 col-sm-6 search-trigger">
                     <div className="right-button">
@@ -89,7 +89,7 @@ setUser = (user) =>{
                     <div className="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul className="nav navbar-nav menu_nav ml-auto mr-auto">
                             <li className="nav-item active"><Link className="nav-link" to="/crafts">All Crafts</Link></li> 
-                            <li className="nav-item"><Link className="nav-link" to="/crafts/create">Add Craft</Link></li> <li class="nav-item submenu dropdown">
+                            <li className="nav-item"><Link className="nav-link" to="/crafts/create">Post Craft</Link></li> <li class="nav-item submenu dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inspo</a>
                                 <ul class="dropdown-menu">
                                     <li class="nav-item"><Link to='/photos' class="nav-link" >Photos</Link></li>
@@ -111,6 +111,8 @@ setUser = (user) =>{
         </div>
     </header>
 
+    
+
 
     
 
@@ -130,6 +132,8 @@ setUser = (user) =>{
         <Route exact path="/photos" render={(props)=><GetPhotos {...props}/>}/>
         <Route exact path="/videos" render={(props)=><GetVideos {...props} />}/>
       </Switch>
+
+{!this.state.user?.email && <RandomCrafts/>}
 
 
       </div>

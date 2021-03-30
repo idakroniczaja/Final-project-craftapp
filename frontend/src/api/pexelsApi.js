@@ -12,7 +12,7 @@ const createHeaders = ()=> {
 
 export function getPhoto (query) {
 
-   return axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=10`,createHeaders())
+   return axios.get(`https://api.pexels.com/v1/search?query=${query}&per_page=15`,createHeaders())
     
  
 }

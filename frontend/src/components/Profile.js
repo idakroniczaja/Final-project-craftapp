@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
-import { confirmAlert } from 'react-confirm-alert'; 
 import * as service from "../api/service";
 import * as apirequest from "../api/predicthqApi";
 import * as pexelsApi from "../api/pexelsApi"
@@ -21,10 +20,11 @@ class Profile extends Component {
     localStorage.removeItem("token");
     this.props.setUser({});
     this.props.history.push('/auth')
-    return !this.props.user;
+    // return !this.props.user;
   };
 
   componentDidMount() {
+    console.log(this.crafts)
     
     service
     .getMyCrafts()
@@ -137,8 +137,7 @@ showMyCrafts = () => {
   return this.state.crafts.map((each) => {
       return (
           <>      
-        {/* 
-        <button onClick={()=>this.deleteCraft(each._id)}>Delete</button>  */}
+    
 
         <div class="blog_item_img">
                           <img class="card-img rounded-0" src={each.imageUrl} alt=""/>
@@ -165,6 +164,7 @@ showMyCrafts = () => {
       )
   });
 };
+
 
 
 
@@ -215,7 +215,7 @@ showBestCrafts =()=>{
      return (
       <li key={each.id} >
       <p >
-        <img class="img-fluid" src={each.src.original}  alt=""/>
+        <Link to='/photos'><img class="img-fluid" src={each.src.original}  alt=""/></Link>
       </p>
      </li>
 
@@ -368,7 +368,7 @@ showBestCrafts =()=>{
 
         {/* Profile
         <br />
-        {this.props.user.email}
+        
         
        
 
@@ -404,10 +404,7 @@ showBestCrafts =()=>{
 
 
       
-        {/* <GetPhotos/>
-
-        <GetVideos/> */}
-
+    
 
 
 

@@ -29,11 +29,11 @@ class Auth extends Component {
               />
             </div>
 
-            <RandomCrafts/>
+      
           </div>
           }
 
-          {/* {this.props.user.email && this.props.history.push('/profile')} */}
+          {this.props.user.email && this.props.history.push('/profile')}
 
           
         

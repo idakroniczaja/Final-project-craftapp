@@ -14,44 +14,52 @@ class CraftDetails extends Component {
   };
   
   componentDidMount() {
+        this.getSingleCraft();
+        this.getAllCrafts();
+       
+        
+  }
+  
 
- service
+getSingleCraft = ()=>{
+  service
     .showCraftDetails(this.props.match.params.id)
     .then((res) => {
       const theCraft = res.data;
-      console.log(theCraft)
+      // console.log(theCraft)
       this.setState({
         craft: theCraft});
       })
       .catch((err) => {
         console.log(err);
       });
+}
 
-
-    
-     service
+getAllCrafts = () =>{
+ service
       .showAllCrafts()
       .then(res=>{
-      console.log(res)
         this.setState({
          userCrafts:res
         })
       })
-    
-    
-  }
-  
+}
+
 
     showUserCraftsTitles = ()=>{
-      return this.state.userCrafts.filter(each=>each.userId==this.state.craft.userId).map(each=>{
+      return [...this.state.userCrafts].filter(each=>each.userId==this.state.craft.userId)
+      .map(each=>{
         return (
-    <li key={each._id}><Link to={`/crafts/${each._id}`}>{each.title}</Link></li>
-  )
-})
-    }
-
-    showUserCraftsSide = ()=>{
-      return this.state.userCrafts.filter(each=>each.userId==this.state.craft.userId).map(each=>{
+          <li key={each._id}><Link to={`/crafts/${each._id}`}>{each.title}</Link></li>
+          )
+        })
+      }
+      
+      showUserCraftsSide = ()=>{
+        return [...this.state.userCrafts].filter(each=>each.userId==this.state.craft.userId)
+        .filter((each,i)=>i<4)
+      
+      .map(each=>{
         return (
                     <div key={each._id} class="media post_item">
                             <img src={each.imageUrl} alt="post" width='100vw'/>
@@ -86,11 +94,32 @@ class CraftDetails extends Component {
 
         })
     }
+
+    findMyNextCraft =()=>{
+      console.log(this.state.craft)
+      let myCrafts = this.state.userCrafts.filter(each=>each.userId==this.state.craft.userId)
+      // let element = myCrafts.filter((elem)=>elem.title.includes(this.state.craft.title))
+      // console.log(element)
+      console.log(myCrafts.filter((e,i)=>{
+       return myCrafts.filter((elem)=>elem.title.includes(this.state.craft.title))
+      }
+      
+      ))
+    //  .filter((each, index)=>index > myCrafts.indexOf(this.state.craft))
+      // .filter((elem,i)=>i===0)
+      // .map(each=>{
+      //   return(<>{each.title}</>)
+      // })
+      
+      // .map(each=>each.title)
+    }
     
     
     render() {
+
       return (
         <div>
+        {this.findMyNextCraft(this.state.craft)}
 
 <section class="banner_area">
       <div class="banner_inner d-flex align-items-center">
@@ -122,10 +151,17 @@ class CraftDetails extends Component {
                             <li><i class="far fa-clock"></i> {this.state.craft.createdAt}</li>
                             <li><i class="far fa-comments"></i>{this.state.craft.comments?.length}</li>
                         </ul>
+                        <div style={{width:'15vw', display:'flex', justifyContent:'space-between'}}>
+
                         {this.props.user._id===this.state.craft.userId && 
-                        
-                             <button class="main_btn" style={{borderRadius:'5px', height:'5vh', marginBottom:'10px'}} onClick={this.deleteCraft}>Delete this craft</button>
+                        <>
+                             <button class="main_btn" style={{borderRadius:'5px', height:'5vh', width:'7vw', marginBottom:'10px'}} onClick={this.deleteCraft}>Delete</button>
+                             <button class="main_btn" style={{borderRadius:'5px', height:'5vh', marginBottom:'10px', width:'7vw'}} onClick={()=>this.setState({ edit: !this.state.edit })}>Edit</button>
+                        </>
                          }
+
+                         {/* { this.props.user._id===this.state.craft.userId && <button class="main_btn" style={{borderRadius:'5px', height:'5vh', marginBottom:'10px', width:'7vw'}} onClick={()=>this.setState({ edit: !this.state.edit })}>Edit</button>} */}
+                        </div>
 
                         </div>
                   
@@ -133,8 +169,9 @@ class CraftDetails extends Component {
                         <h4>Description:</h4>
                             {this.state.craft.description}
                         </p>
+                         {this.state.edit && <div>{<EditCraft theCraft={this.state.craft} getTheCraft={this.getSingleCraft} {...this.props}/>}</div>}
                         <div class="quote-wrapper" >
-                            <ol class="quotes" style={{display:'flex', flexDirection:'column', alignItems:'flex-start'}}>
+                            <ol class="quotes" style={{display:'flex', flexDirection:'column', alignItems:'flex-center'}}>
                             <h3>Steps:</h3>
                             {this.state.craft.steps?.length===0 && <div>No steps provided.</div> ||
                             this.state.craft.steps?.map((step, i)=>{
@@ -152,6 +189,7 @@ class CraftDetails extends Component {
                             
                           
                             </ol>
+                            { this.props.user._id===this.state.craft.userId && <div><AddStep theCraft={this.state.craft} getTheCraft={this.getSingleCraft} /> </div>}
                         </div>
                      
                          
@@ -195,7 +233,8 @@ class CraftDetails extends Component {
                                 <div class="detials">
                                     <p>Next Post</p>
                                     <a href="#">
-                                        <h4>Telescopes 101</h4>
+                               
+                                       
                                     </a>
                                 </div>
                                 <div class="arrow">
@@ -272,12 +311,12 @@ class CraftDetails extends Component {
                  
 
                     <aside class="single_sidebar_widget popular_post_widget">
-                        <h3 class="widget_title">Recent Post</h3>
+                        <h3 class="widget_title">Last posts from this user</h3>
                         {this.showUserCraftsSide()}
                  
                     </aside>
                     <aside class="single_sidebar_widget tag_cloud_widget">
-                        <h4 class="widget_title">This users posts</h4>
+                        <h4 class="widget_title">All posts from this users</h4>
                         <ul class="list">
                         {this.showUserCraftsTitles()}
                         </ul>
@@ -350,6 +389,8 @@ class CraftDetails extends Component {
 
       
 </a> */}
+
+
       </div>
     );
   }

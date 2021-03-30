@@ -28,14 +28,14 @@ class RandomCrafts extends React.Component{
             
                 return(
                     <>
-                    <div className="col-lg-5 col-xl-6" >
+                    <div className="col-lg-5 col-xl-6" style={{display:'flex', flexDirection:'column', justifyContent:'space-around', margin:'auto'}}>
 
-                     <div className="single-blog column style-four" > 
-                        <div className="thumb">
+                     <div className="single-blog column style-four"> 
+                        <div className="thumb" >
                                 <img className="img-fluid" src={sorted1.map(each=>each.imageUrl)} alt={sorted1.map(each=>each.title)}/>
                         </div>
 
-                        <div className="col-12 short_details ">
+                        <div className="col-12 short_details " style={{marginTop:'15vh'}}>
                             <div className="meta-top d-flex">
                                 <a >Comments: {sorted1.map(each=>each.comments.length)}</a>
                             </div>

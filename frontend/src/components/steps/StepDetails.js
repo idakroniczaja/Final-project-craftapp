@@ -57,13 +57,36 @@ blur = (e) => {
 render(){
     return(
         <div>
-                <h1 id="title" style={{ background: this.state.edit ? '#bbb' : '' }} onBlur={this.blur} contentEditable={this.state.edit}>{this.state.step.title}</h1>
+                {/* <h1 id="title" style={{ background: this.state.edit ? '#bbb' : '' }} onBlur={this.blur} contentEditable={this.state.edit}>{this.state.step.title}</h1>
                 <p id="description" style={{ background: this.state.edit ? '#bbb' : '' }} onBlur={this.blur} contentEditable={this.state.edit}>{this.state.step.description}</p>
                 <button onClick={() => this.setState({ edit: !this.state.edit })} >✏️ Edit </button>
                 <button onClick={this.deleteStep}>Delete</button>
                 <Link to={`/crafts/${this.props.match.params.id}`}>Back to </Link>
                 <br></br>
-                <Link to={"/profile"}>Back to list of your crafts</Link>
+                <Link to={"/profile"}>Back to list of your crafts</Link> */}
+
+
+
+    <div class="video-area background_one area-padding" style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
+        <div class="container" >
+            <div class="row">
+                <div class="area-heading">
+                    <h3 id="title" style={{ background: this.state.edit ? 'white' : '' }} onBlur={this.blur} contentEditable={this.state.edit}>{this.state.step.title}</h3>
+                    <p id="description" style={{ background: this.state.edit ? 'white' : '' }} onBlur={this.blur} contentEditable={this.state.edit}>{this.state.step.description}</p>
+                    
+
+                    <button class="main_btn" style={{borderRadius:'5px', height:'5vh', marginTop:'5vh', width:'7vw', marginRight:'10vw'}} onClick={() => this.setState({ edit: !this.state.edit })} >Edit</button>
+                    <button class="main_btn" style={{borderRadius:'5px', height:'5vh', width:'7vw'}} onClick={this.deleteStep}>Delete</button>
+                 </div>
+            </div>
+        </div>
+        <div style={{width:'30vw'}}>
+            <Link to={`/crafts/${this.props.match.params.id}`} style={{color:'gray', padding:'10px'}}><h4>Back to craft details</h4></Link>
+            <Link to={"/profile"} style={{color:'gray'}}><h4>Back to your profile</h4></Link>
+        </div>
+    </div>
+
+
             </div>
         )
         
