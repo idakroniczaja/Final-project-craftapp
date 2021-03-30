@@ -15,7 +15,8 @@ import Auth from './components/auth/Auth';
 import Profile from './components/Profile'
 import AddComment from './components/comments/AddComment';
 import RandomCrafts from './components/RandomCrafts';
-
+import GetPhotos from './components/photos/getPhotos'
+import GetVideos from './components/photos/getVideos'
 
 
 class App extends React.Component {
@@ -88,7 +89,13 @@ setUser = (user) =>{
                     <div className="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul className="nav navbar-nav menu_nav ml-auto mr-auto">
                             <li className="nav-item active"><Link className="nav-link" to="/crafts">All Crafts</Link></li> 
-                            <li className="nav-item"><Link className="nav-link" to="/crafts/create">Add Craft</Link></li> 
+                            <li className="nav-item"><Link className="nav-link" to="/crafts/create">Add Craft</Link></li> <li class="nav-item submenu dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inspo</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><Link to='/photos' class="nav-link" >Photos</Link></li>
+                                    <li class="nav-item"><Link  to='/videos' class="nav-link" >Videos</Link></li>
+                                </ul>
+                            </li>
 
 
                             {this.state.user?.email &&  <li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link></li> 
@@ -120,6 +127,8 @@ setUser = (user) =>{
         <Route exact path="/auth" render={(props)=><Auth setUser={this.setUser} user={this.state.user} {...props}/>}/>
         <Route exact path="/profile" render={(props)=><Profile setUser={this.setUser} user={this.state.user} {...props}/>}/>
         <Route exact path="/comments" render={(props)=><AddComment {...props} />}/>
+        <Route exact path="/photos" render={(props)=><GetPhotos {...props}/>}/>
+        <Route exact path="/videos" render={(props)=><GetVideos {...props} />}/>
       </Switch>
 
 
