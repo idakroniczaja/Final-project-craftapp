@@ -43,7 +43,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(
     cors({
       // this could be multiple domains/origins, but we will allow just our React app
-      origin: ['http://localhost:3000']
+      origin: ['http://localhost:3000', process.env.clientURL]
     })
   );
 

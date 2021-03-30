@@ -3,7 +3,7 @@ import axios from 'axios';
 const createHeaders = ()=> {
   return{
     headers:{
-      Authorisation: `Barer ${localStorage.getItem('token')}`
+      Authorisation: `Bearer ${localStorage.getItem('token')}`
     }
   }
 
