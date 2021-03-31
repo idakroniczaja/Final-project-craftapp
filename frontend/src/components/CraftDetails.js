@@ -123,23 +123,7 @@ turnDate = (string)=>{
         })
     }
 
-    findMyNextCraft =()=>{
-      console.log(this.state.craft)
-      let myCrafts = this.state.userCrafts.filter(each=>each.userId==this.state.craft.userId)
-      // let element = myCrafts.filter((elem)=>elem.title.includes(this.state.craft.title))
-      // console.log(element)
-      console.log(myCrafts.filter((e,i)=>{
-       return myCrafts.filter((elem)=>elem.title.includes(this.state.craft.title))
-       
-      }))
-    //  .filter((each, index)=>index > myCrafts.indexOf(this.state.craft))
-      // .filter((elem,i)=>i===0)
-      // .map(each=>{
-      //   return(<>{each.title}</>)
-      // })
-      
-      // .map(each=>each.title)
-    }
+
     
     
     render() {
@@ -188,7 +172,7 @@ turnDate = (string)=>{
                         </>
                          }
 
-                         {/* { this.props.user._id===this.state.craft.userId && <button class="main_btn" style={{borderRadius:'5px', height:'5vh', marginBottom:'10px', width:'7vw'}} onClick={()=>this.setState({ edit: !this.state.edit })}>Edit</button>} */}
+                        
                         </div>
 
                         </div>
@@ -230,53 +214,11 @@ turnDate = (string)=>{
                             <p class="comment-count"><i class="far fa-comment"></i>{this.state.craft.comments?.length}</p>
                         </div>
                         <ul class="social-icons">
-                            <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="https://twitter.com/?lang=en"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="https://dribbble.com/dribbble"><i class="fab fa-dribbble"></i></a></li>
-                            <li><a href="https://www.behance.net/"><i class="fab fa-behance"></i></a></li>
+                            <li><a href="https://www.pinterest.com/"><i class="fab fa-pinterest"></i></a></li>
+                            <li><a href="https://www.etsy.com/"><i class="fab fa-etsy"></i></a></li>
+                            <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
                         </ul>
-                    </div>
-
-                    <div class="navigation-area blog-author">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img class="img-fluid" src="/eden-master/img/blog/prev.jpg" alt=""/>
-                                    </a>
-                                </div>
-                                <div class="arrow">
-                                    <a href="#">
-                                        <span class="lnr text-white lnr-arrow-left"></span>
-                                    </a>
-                                </div>
-                                <div class="detials">
-                                    <p>Prev Post</p>
-                                    <a href="#">
-                                        <h4>Space The Final Frontier</h4>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                                <div class="detials">
-                                    <p>Next Post</p>
-                                    <a href="#">
-                               
-                                       
-                                    </a>
-                                </div>
-                                <div class="arrow">
-                                    <a href="#">
-                                        <span class="lnr text-white lnr-arrow-right"></span>
-                                    </a>
-                                </div>
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img class="img-fluid" src="/eden-master/img/blog/next.jpg" alt=""/>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
 

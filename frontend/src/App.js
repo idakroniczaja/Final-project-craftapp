@@ -134,7 +134,7 @@ setUser = (user) =>{
         <Route exact path="/videos" render={(props)=><GetVideos {...props} />}/>
       </Switch>
 
-{!this.state.user.id && <RandomCrafts/>}
+{!this.state.user?.email && <RandomCrafts/>}
 
 
       </div>

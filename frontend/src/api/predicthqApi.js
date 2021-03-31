@@ -17,7 +17,7 @@ let yyyy = String(new Date().getFullYear())
 let startDate = yyyy + '-' + mm + '-' + dd;
 
 let twoWeeks = new Date()
-twoWeeks.setDate(twoWeeks.getDate()+14)
+twoWeeks.setDate(twoWeeks.getDate()+30)
 
 let ddEnd = String(twoWeeks.getDate()).padStart(2, '0');
 let mmEnd = String(twoWeeks.getMonth()+1).padStart(2,'0');

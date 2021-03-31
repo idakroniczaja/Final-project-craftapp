@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import * as service from "../api/service";
 import * as apirequest from "../api/predicthqApi";
 import * as pexelsApi from "../api/pexelsApi"
+import ShowAll from "./ShowAll";
+import HideAll from "./HideAll"
 
 
 
@@ -11,7 +13,8 @@ class Profile extends Component {
     crafts: [],
     events:[],
     bestCrafts:[],
-    curatedPhotos:[]
+    curatedPhotos:[],
+    clicked:'false'
   }
 
   logOut = () => {
@@ -23,8 +26,7 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    console.log(this.crafts)
-    
+  
     service
     .getMyCrafts()
     .then((res) => {
@@ -79,16 +81,21 @@ showSearchResultsForEvent = ()=>{
            
                             <li key={each.id} class="nav-item submenu dropdown">
                           
-                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{each.title}</a>
-                                 <p>{each.start}</p> 
-                                
+                                 <h4 class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{each.title}</h4>
+                                 <p>{this.turnDate(each.start)}</p> 
+                                 <p>Category: {each.category}</p>
+                                 
+                                 {each.entities.length>0 &&
+                                 <p>Address: {each.entities[0].formatted_address} - {each.entities[0].name}</p>
+                                 || <p>No address provided.</p>
+                                 }
                              
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link" href="blog.html">Category: {each.category}</a></li>
-                                     {each.entities.length>0 &&
+                                    <li class="nav-item">Category: {each.description}</li>
+                                     {/* {each.entities.length>0 &&
                                      <li class="nav-item"><a class="nav-link" href="single-blog.html">Address: {each.entities[0].formatted_address} - {each.entities[0].name}</a></li>
                                      || <li class="nav-item"><a class="nav-link" href="single-blog.html">No address provided.</a></li>
-                                     }
+                                     } */}
                                     
                                 </ul>
                             
@@ -150,8 +157,12 @@ deleteCraft = (id) => {
             }
 
 
-showMyCrafts = () => {
-  return this.state.crafts.map((each) => {
+showMyFirstThreeCrafts = () => {
+
+  return this.state.crafts
+  .reverse()
+  .filter((elem, i)=>i<3)
+  .map((each) => {
       return (
           <>      
     
@@ -165,7 +176,7 @@ showMyCrafts = () => {
                         </div>
                         
                         <div class="blog_details">
-                            <a class="d-inline-block" href="single-blog.html">
+                            <a class="d-inline-block" >
                                 <Link to={`/crafts/${each._id}`}><h2 key={each._id}>{each.title}</h2></Link>
                             </a>
                             <p>{each.description}</p>
@@ -183,7 +194,40 @@ showMyCrafts = () => {
 };
 
 
+showMyNextThreeCrafts = () => {
+  return this.state.crafts
+  .reverse()
+  .map((each) => {
+      return (
+          <>      
+    
 
+        <div className="gridBox blog_details single-blog" id='profilePosts'>
+    
+                          <img  src={each.imageUrl} alt=""/>
+                            <p>Posted on {this.turnMonth(each.createdAt)}</p>
+                            <h3>{each.createdAt.split('T')[0].split('-')[2]}</h3>
+                          
+                
+                        
+                        <div >
+                        <a class="d-inline-block" href="single-blog.html">
+                                <Link   to={`/crafts/${each._id}`}><h2 key={each._id}>{each.title}</h2></Link>
+                            </a>
+                            <p>{each.description}</p>
+                            <ul class="blog-info-link">
+                              <li><i class="far fa-comments"></i> {each.comments.length}</li>
+                              <li><button  onClick={()=>this.deleteCraft(each._id)} class="main_btn" style={{borderRadius:'5px'}}>Delete</button></li>
+                            </ul>    
+                            
+                          </div>
+            </div>
+
+
+        </>
+      )
+  });
+};
 
 allMyPosts = ()=>{
   return this.state.crafts.map(each=>{
@@ -202,6 +246,8 @@ clearEventSearch =()=>{
     events:[]
   })
   }
+
+
 
 
 showBestCrafts =()=>{
@@ -279,7 +325,7 @@ showBestCrafts =()=>{
 
 
                       <article class="blog_item">
-                      {localStorage.token && this.showMyCrafts()}
+                      {localStorage.token && this.showMyFirstThreeCrafts()}
 
                       </article>
                  
@@ -289,24 +335,16 @@ showBestCrafts =()=>{
 
                       <nav class="blog-pagination justify-content-center d-flex">
                           <ul class="pagination">
-                              <li class="page-item">
-                                  <a href="#" class="page-link" aria-label="Previous">
-                                      <i class="ti-angle-left"></i>
-                                  </a>
-                              </li>
-                              <li class="page-item">
-                                  <a href="#" class="page-link">1</a>
-                              </li>
-                              <li class="page-item active">
-                                  <a href="#" class="page-link">2</a>
-                              </li>
-                              <li class="page-item">
-                                  <a href="#" class="page-link" aria-label="Next">
-                                      <i class="ti-angle-right"></i>
-                                  </a>
-                              </li>
+                              
+                        {<ShowAll showNext={this.showMyNextThreeCrafts} />
+                        ||
+
+                        <HideAll showNext={this.showMyNextThreeCrafts}/>
+                        }
+                              
                           </ul>
                       </nav>
+                                 
 
                   </div>
               </div>
@@ -337,9 +375,16 @@ showBestCrafts =()=>{
                       <aside class="single_sidebar_widget post_category_widget">
 
                         {this.state.events.length>0 &&
-     <button onClick={this.clearEventSearch} class="main_btn" style={{borderRadius:'5px'}}>Clear search</button>
+                        <>
+                           <button onClick={this.clearEventSearch} class="main_btn" style={{borderRadius:'5px', marginBottom:'2vw'}}>Clear search</button>
+                           <h4 class="widget_title">We found {this.state.events.length} {this.event.toUpperCase()} events in {this.place.includes(' ') &&
+                           this.place.split(' ').map(each=>each.charAt(0).toUpperCase()+each.slice(1)).join(' ')
+                           ||
+                             this.place.split('')[0].toUpperCase()+this.place.slice(1)} for this month</h4>
+                        </> ||
+                        <h4 class="widget_title">Next month events</h4>
 }
-                        <h4 class="widget_title">Events</h4>
+                        
                         <ul class="list cat-list">
                             {this.showSearchResultsForEvent()}
                         </ul>
