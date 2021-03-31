@@ -10,7 +10,9 @@ class CraftDetails extends Component {
   state = {
     craft:{},
     edit: false,
-    userCrafts:[]
+    userCrafts:[],
+    craftId: this.props.match.params.id
+  
   };
   
   componentDidMount() {
@@ -23,7 +25,7 @@ class CraftDetails extends Component {
 
 getSingleCraft = ()=>{
   service
-    .showCraftDetails(this.props.match.params.id)
+    .showCraftDetails(this.state.craftId)
     .then((res) => {
       const theCraft = res.data;
       // console.log(theCraft)
@@ -45,18 +47,42 @@ getAllCrafts = () =>{
       })
 }
 
+// changeID = ()=>{
+//   return this.state.userCrafts.filter(each=>each.userId==this.state.craft.userId)
+//   .map(each=>{
+//   let id = each._id
+// this.setState({
+//   craftId:id
+// })
+//   })
+  
+// }
+
+turnDate = (string)=>{
+  let monthNumberToLabelMap = [
+    'January','February','March','April','May','June','July', 'August', 'September', 'October', 'November', 'December'
+  ]
+  let month=monthNumberToLabelMap.filter((each,i)=>i==Number(string.split('T')[0].split('-')[1])-1)
+  let day=Number(string.split('T')[0].split('-')[2])
+  let year=Number(string.split('T')[0].split('-')[0])
+  return `${month} ${day}, ${year}`
+  }
+
 
     showUserCraftsTitles = ()=>{
       return [...this.state.userCrafts].filter(each=>each.userId==this.state.craft.userId)
       .map(each=>{
+    
         return (
-          <li key={each._id}><Link to={`/crafts/${each._id}`}>{each.title}</Link></li>
+          <li key={each._id}><button>{each.title}</button></li>
           )
         })
       }
       
       showUserCraftsSide = ()=>{
-        return [...this.state.userCrafts].filter(each=>each.userId==this.state.craft.userId)
+        return [...this.state.userCrafts]
+        .reverse()
+        .filter(each=>each.userId==this.state.craft.userId)
         .filter((each,i)=>i<4)
       
       .map(each=>{
@@ -67,7 +93,9 @@ getAllCrafts = () =>{
                                 <a href="single-blog.html">
                                     <h3><Link to={`/crafts/${each._id}`}>{each.title}</Link></h3>
                                 </a>
-                                <p>{each.createdAt}</p>
+                                <p>{this.turnDate(each.createdAt)}</p>
+
+                    
                             </div>
                     </div>
   )
@@ -102,9 +130,8 @@ getAllCrafts = () =>{
       // console.log(element)
       console.log(myCrafts.filter((e,i)=>{
        return myCrafts.filter((elem)=>elem.title.includes(this.state.craft.title))
-      }
-      
-      ))
+       
+      }))
     //  .filter((each, index)=>index > myCrafts.indexOf(this.state.craft))
       // .filter((elem,i)=>i===0)
       // .map(each=>{
@@ -119,7 +146,7 @@ getAllCrafts = () =>{
 
       return (
         <div>
-        {this.findMyNextCraft(this.state.craft)}
+     
 
 <section class="banner_area">
       <div class="banner_inner d-flex align-items-center">
@@ -148,7 +175,8 @@ getAllCrafts = () =>{
                         <h2>{this.state.craft.title}</h2> 
                         <div style={{display:'flex', alignItems:'center', justifyContent:'space-between'}}>
                         <ul class="blog-info-link mt-4 mb-4">
-                            <li><i class="far fa-clock"></i> {this.state.craft.createdAt}</li>
+                            <li><i class="far fa-clock"></i> {this.turnDate(String(this.state.craft.createdAt))}</li>
+                       
                             <li><i class="far fa-comments"></i>{this.state.craft.comments?.length}</li>
                         </ul>
                         <div style={{width:'15vw', display:'flex', justifyContent:'space-between'}}>
@@ -277,7 +305,7 @@ getAllCrafts = () =>{
                                                 <a href="#">Commented on</a>
                                            
                                             </h5> 
-                                            <p class="date">{comment.createdAt}</p>
+                                            <p class="date">{this.turnDate(comment.createdAt)}</p>
                                         </div>
    
                                 </div>

@@ -124,6 +124,7 @@ setUser = (user) =>{
         <Route exact path='/crafts/create' render={(props)=><AddCraft user={this.state.user} {...props}/>}/>
         <Route exact path='/crafts/:id/edit' render={(props)=> <EditCraft {...props}/>}/>
         <Route exact path='/crafts/:id' render={(props)=><CraftDetails user={this.state.user} {...props}/>}/>
+       
 
         <Route exact path="/crafts/:id/steps/:stepId" render={(props)=><StepDetails user={this.state.user} {...props}/>}/>
         <Route exact path="/auth" render={(props)=><Auth setUser={this.setUser} user={this.state.user} {...props}/>}/>
@@ -133,7 +134,7 @@ setUser = (user) =>{
         <Route exact path="/videos" render={(props)=><GetVideos {...props} />}/>
       </Switch>
 
-{!this.state.user?.email && <RandomCrafts/>}
+{!this.state.user.id && <RandomCrafts/>}
 
 
       </div>

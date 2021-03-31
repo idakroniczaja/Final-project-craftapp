@@ -4,8 +4,7 @@ import * as service from "../api/service";
 import * as apirequest from "../api/predicthqApi";
 import * as pexelsApi from "../api/pexelsApi"
 
-import GetPhotos from './photos/getPhotos'
-import GetVideos from './photos/getVideos'
+
 
 class Profile extends Component {
   state = {
@@ -19,8 +18,8 @@ class Profile extends Component {
 
     localStorage.removeItem("token");
     this.props.setUser({});
-    this.props.history.push('/auth')
-    // return !this.props.user;
+    this.props.history.push('/')
+    return !this.props.user._id
   };
 
   componentDidMount() {
@@ -129,8 +128,26 @@ deleteCraft = (id) => {
         })
         }
 
+        turnDate = (string)=>{
+          let monthNumberToLabelMap = [
+            'January','February','March','April','May','June','July', 'August', 'September', 'October', 'November', 'December'
+          ]
+         
+          let month=monthNumberToLabelMap.filter((each,i)=>i==Number(string.split('T')[0].split('-')[1])-1)
+          let day=Number(string.split('T')[0].split('-')[2])
+          let year=Number(string.split('T')[0].split('-')[0])
+          return `${month} ${day}, ${year}`
+          }
 
-
+          turnMonth = (string)=>{
+            let monthNumberToLabelMap = [
+              'January','February','March','April','May','June','July', 'August', 'September', 'October', 'November', 'December'
+            ]
+           
+            let month=monthNumberToLabelMap.filter((each,i)=>i==Number(string.split('T')[0].split('-')[1])-1)
+       
+            return month
+            }
 
 
 showMyCrafts = () => {
@@ -142,8 +159,8 @@ showMyCrafts = () => {
         <div class="blog_item_img">
                           <img class="card-img rounded-0" src={each.imageUrl} alt=""/>
                           <a href="#" class="blog_item_date">
-                            <h3>15</h3>
-                            <p>Jan</p>
+                            <h3>{each.createdAt.split('T')[0].split('-')[2]}</h3>
+                            <p>{this.turnMonth(each.createdAt)}</p>
                             </a>
                         </div>
                         
@@ -200,7 +217,7 @@ showBestCrafts =()=>{
                                   <a href="single-blog.html">
                                   <Link to={`/crafts/${each._id}`}><h3 key={each._id}>{each.title}</h3></Link>
                                   </a>
-                                  <p>{each.createdAt}</p>
+                                  <p>{this.turnDate(each.createdAt)}</p>
                               </div>
                           </div>
     )

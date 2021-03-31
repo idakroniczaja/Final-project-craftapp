@@ -48,10 +48,10 @@ class AllCrafts extends React.Component {
     //     </div> 
     // </div>
 
-    <div key={each._id} className='gridBox'>
+    <div key={each._id} className='gridBox single-blog'>
 
 
-<Link to={`/crafts/${each._id}`}><img src={each.imageUrl} style={{borderRadius:'5px'}}/></Link>
+<Link to={`/crafts/${each._id}`}><img className='img-fluid' src={each.imageUrl} style={{borderRadius:'5px'}}/></Link>
     
     <h3 style={{marginTop:'4vh', color:'gray'}}>{each.title.split('')[0].toUpperCase()+each.title.slice(1)}</h3>
 
