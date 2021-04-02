@@ -74,7 +74,7 @@ showSearchResultsForEvent = ()=>{
     return this.state.events.map(each=>{
         return (
                             <li key={each.id} class="nav-item submenu dropdown">
-                          
+                            
                                  <h4 class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{each.title}</h4>
                                  <p>{this.turnDate(each.start)}</p> 
                                  <p>Category: {each.category}</p>
@@ -362,6 +362,7 @@ showBestCrafts =()=>{
                         <ul class="list cat-list">
                             {this.showSearchResultsForEvent()}
                         </ul>
+                         
                       </aside>
 
                       <aside class="single_sidebar_widget popular_post_widget">
@@ -372,7 +373,7 @@ showBestCrafts =()=>{
                    
                       </aside>
                       <aside class="single_sidebar_widget tag_cloud_widget">
-                          <h4 class="widget_title">All your posts</h4>
+                          <h4 class="widget_title">You have {this.state.crafts.length} posts</h4>
                           <ul class="list">
                           {this.allMyPosts()}
                               
