@@ -74,7 +74,9 @@ turnDate = (string)=>{
       .map(each=>{
     
         return (
-          <li key={each._id}><button>{each.title}</button></li>
+          <li key={each._id}>
+          <Link to={`/crafts/${each._id}`}>{each.title}</Link>
+        </li>
           )
         })
       }

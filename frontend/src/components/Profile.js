@@ -4,7 +4,7 @@ import * as service from "../api/service";
 import * as apirequest from "../api/predicthqApi";
 import * as pexelsApi from "../api/pexelsApi"
 import ShowAll from "./ShowAll";
-import HideAll from "./HideAll"
+
 
 
 
@@ -30,7 +30,7 @@ class Profile extends Component {
     service
     .getMyCrafts()
     .then((res) => {
-      this.setState({ crafts: res.data });
+      this.setState({ crafts: res.data.reverse()});
     });
 
     service
@@ -44,9 +44,10 @@ class Profile extends Component {
       pexelsApi
   .getCuratedPhotos()
   .then(response=>{
-    console.log(response.data.photos.filter((elem, index)=>index<6))
+    
     this.setState({
-      curatedPhotos: response.data.photos.filter((elem, index)=>index<6)
+
+      curatedPhotos: response.data.photos.sort(() => Math.random() - Math.random()).slice(0, 6)
 
     })
 })
@@ -70,15 +71,8 @@ if(e.target.name==='event'){
 
 
 showSearchResultsForEvent = ()=>{
-
- 
-
     return this.state.events.map(each=>{
-    
         return (
-    
-      
-           
                             <li key={each.id} class="nav-item submenu dropdown">
                           
                                  <h4 class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{each.title}</h4>
@@ -92,11 +86,7 @@ showSearchResultsForEvent = ()=>{
                              
                                 <ul class="dropdown-menu">
                                     <li class="nav-item">Category: {each.description}</li>
-                                     {/* {each.entities.length>0 &&
-                                     <li class="nav-item"><a class="nav-link" href="single-blog.html">Address: {each.entities[0].formatted_address} - {each.entities[0].name}</a></li>
-                                     || <li class="nav-item"><a class="nav-link" href="single-blog.html">No address provided.</a></li>
-                                     } */}
-                                    
+                                     
                                 </ul>
                             
                             </li>
@@ -158,15 +148,11 @@ deleteCraft = (id) => {
 
 
 showMyFirstThreeCrafts = () => {
-
   return this.state.crafts
-  .reverse()
   .filter((elem, i)=>i<3)
   .map((each) => {
       return (
           <>      
-    
-
         <div class="blog_item_img">
                           <img class="card-img rounded-0" src={each.imageUrl} alt=""/>
                           <a href="#" class="blog_item_date">
@@ -187,44 +173,34 @@ showMyFirstThreeCrafts = () => {
                             
                         </div>
 
-
         </>
       )
   });
 };
 
 
-showMyNextThreeCrafts = () => {
+showMyCraftsBottom = () => {
   return this.state.crafts
-  .reverse()
   .map((each) => {
       return (
-          <>      
-    
-
         <div className="gridBox blog_details single-blog" id='profilePosts'>
     
                           <img  src={each.imageUrl} alt=""/>
-                            <p>Posted on {this.turnMonth(each.createdAt)}</p>
+                            <p style={{paddingTop:'5vh'}}>Posted on {this.turnMonth(each.createdAt)}</p>
                             <h3>{each.createdAt.split('T')[0].split('-')[2]}</h3>
                           
-                
-                        
                         <div >
                         <a class="d-inline-block" href="single-blog.html">
                                 <Link   to={`/crafts/${each._id}`}><h2 key={each._id}>{each.title}</h2></Link>
                             </a>
-                            <p>{each.description}</p>
-                            <ul class="blog-info-link">
+                            <p className='text'>{each.description}</p>
+                            <ul class="blog-info-link" style={{display:'flex', justifyContent:'space-between'}}>
                               <li><i class="far fa-comments"></i> {each.comments.length}</li>
                               <li><button  onClick={()=>this.deleteCraft(each._id)} class="main_btn" style={{borderRadius:'5px'}}>Delete</button></li>
                             </ul>    
                             
                           </div>
             </div>
-
-
-        </>
       )
   });
 };
@@ -260,9 +236,9 @@ showBestCrafts =()=>{
       <div class="media post_item">
                               <img src={each.imageUrl} width='100vw' alt="post"/>
                               <div class="media-body">
-                                  <a href="single-blog.html">
+                                  
                                   <Link to={`/crafts/${each._id}`}><h3 key={each._id}>{each.title}</h3></Link>
-                                  </a>
+                                  <p><i class="far fa-comments"></i>{each.comments.length}</p>
                                   <p>{this.turnDate(each.createdAt)}</p>
                               </div>
                           </div>
@@ -276,7 +252,7 @@ showBestCrafts =()=>{
     console.log(this.state.curatedPhotos)
    return this.state.curatedPhotos.map(each=>{
      return (
-      <li key={each.id} >
+      <li key={each.id} className='gridBox'>
       <p >
         <Link to='/photos'><img class="img-fluid" src={each.src.original}  alt=""/></Link>
       </p>
@@ -325,7 +301,7 @@ showBestCrafts =()=>{
 
 
                       <article class="blog_item">
-                      {localStorage.token && this.showMyFirstThreeCrafts()}
+                     {this.showMyFirstThreeCrafts()}
 
                       </article>
                  
@@ -333,17 +309,15 @@ showBestCrafts =()=>{
                       
 
 
-                      <nav class="blog-pagination justify-content-center d-flex">
+                      {/* <nav class="blog-pagination justify-content-center d-flex">
                           <ul class="pagination">
                               
-                        {<ShowAll showNext={this.showMyNextThreeCrafts} />
-                        ||
-
-                        <HideAll showNext={this.showMyNextThreeCrafts}/>
-                        }
+                        <ShowAll showNext={this.showMyCraftsBottom} />
+                        
+                       
                               
                           </ul>
-                      </nav>
+                      </nav> */}
                                  
 
                   </div>
@@ -410,7 +384,7 @@ showBestCrafts =()=>{
                       <aside class="single_sidebar_widget instagram_feeds">
                         <h4 class="widget_title">Inspirational photograpy:</h4>
                        
-                        <ul class="instagram_row flex-wrap">
+                        <ul class="instagram_row flex-wrap ">
                         {this.showCuratedPhotos()}
                            
                             
@@ -422,6 +396,11 @@ showBestCrafts =()=>{
                   </div>
               </div>
           </div>
+      <nav style={{margin:'0'}} class="blog-pagination justify-content-center d-flex">
+                          <ul class="pagination">
+                        <ShowAll showNext={this.showMyCraftsBottom} />
+                          </ul>
+                      </nav>
       </div>
   </section>
 

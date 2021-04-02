@@ -1,10 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import * as pexelsApi from "../api/pexelsApi"
 import * as service from '../api/service';
 
 class RandomCrafts extends React.Component{
     state ={
-        crafts:[]
+        crafts:[],
+        curatedPhotos:[]
+
     }
 
     componentDidMount(){
@@ -17,6 +20,8 @@ class RandomCrafts extends React.Component{
             
        
         })
+
+        
     }
 
 
@@ -99,10 +104,9 @@ class RandomCrafts extends React.Component{
 
                 </>
                 )
-
-
-
     }
+
+   
 
     render(){
         return(
@@ -125,18 +129,14 @@ class RandomCrafts extends React.Component{
             </div>
 
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="addvertise">
-                        <a href=""><img src="eden-master/img/banner/add.jpg" alt=""/></a>
-
-                    </div>
-                </div>
-            </div>
+         
 
         </div>
+   
 
     </section>
+
+
             </>
 
         )

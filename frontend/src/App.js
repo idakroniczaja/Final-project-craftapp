@@ -22,11 +22,14 @@ import GetVideos from './components/photos/getVideos'
 class App extends React.Component {
 
 state = {
-  user: {}
+  user: {},
+
 }
 
 
 componentDidMount(){
+  // CHECKING IF THE OBJECT IS EMPTY----console.log(Object.keys(this.state.user).length === 0 && this.state.user.constructor === Object)
+  
   service.getUser()
   .then((user)=>{
     this.setState({user})
@@ -36,6 +39,9 @@ componentDidMount(){
 setUser = (user) =>{
   this.setState({user})
 }
+
+
+
 
   render(){
     return (

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  padding-bottom: 10vh;
   
 }
 
@@ -80,6 +81,16 @@
   }
 }
 
-#profilePosts{
+.text {
+  display: -webkit-box;   
+  -webkit-line-clamp: 3;   
+  -webkit-box-orient: vertical;     
+  overflow: hidden; 
+}
 
+.text:hover {
+  display: -webkit-box;   
+  -webkit-line-clamp: 0;   
+  -webkit-box-orient: horizontal;     
+  overflow: visible; 
 }

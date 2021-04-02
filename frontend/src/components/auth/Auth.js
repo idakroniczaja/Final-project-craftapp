@@ -12,11 +12,11 @@ class Auth extends Component {
   };
 
   render() {
-   
+ 
     return (
       <div>
 
-      {!this.props.user.email &&  <div>
+      {!this.props.user._id  &&  <div>
 
             <div>
             <h3>Sign up/Log in</h3>
