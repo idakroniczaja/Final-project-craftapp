@@ -54,34 +54,28 @@ this.setState({
         return (
             <>
 
-           <div class="comment-form" >
+           <div className="comment-form" >
                     <h4>Leave a Comment</h4>
-                    <form class="form-contact comment_form" onSubmit={this.handleSubmit}>
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <textarea class="form-control w-100" cols="30" rows="9" placeholder="Write Comment" name="description" value={this.state.description} onChange={this.handleChange}></textarea>
+                    <form className="form-contact comment_form" onSubmit={this.handleSubmit}>
+                        <div className="row">
+                            <div className="col-12">
+                                <div className="form-group">
+                                    <textarea className="form-control w-100" cols="30" rows="9" placeholder="Write Comment" name="description" value={this.state.description} onChange={this.handleChange}></textarea>
                                 </div>
                             </div>
                            
                             
                         
                         </div>
-                        <div class="form-group">
-                            <button  class="button button-contactForm">Send</button>
+                        <div className="form-group">
+                            <button  className="button button-contactForm">Send</button>
                         </div>
                     </form>
                 </div>
 
 
 
-            {/* <form onSubmit={this.handleSubmit}>
-            <input name="description" value={this.state.description} onChange={this.handleChange}></input>
-            <button>Add comment</button>
         
-            </form>
-           
-           <>{this.state.message}</> */}
 
           
             </>
