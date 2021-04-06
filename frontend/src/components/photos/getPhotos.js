@@ -53,13 +53,13 @@ class GetPhotos extends Component {
   render() {
     return (
       <>
- <section class="banner_area">
-      <div class="banner_inner d-flex align-items-center">
-        <div class="container">
+ <section className="banner_area">
+      <div className="banner_inner d-flex align-items-center">
+        <div className="container">
           <div
-            class="banner_content d-md-flex justify-content-center align-items-center"
+            className="banner_content d-md-flex justify-content-center align-items-center"
           >
-            <div class="mb-3 mb-md-0">
+            <div className="mb-3 mb-md-0">
               <h2>Photography</h2>
             </div>
           </div>
@@ -70,7 +70,7 @@ class GetPhotos extends Component {
                         <form  onSubmit={this.getPhotos}>
                         <div className="input-group " >
                             <input className="form-control"  onChange={this.searchForPhoto} name="photo" placeholder="inspirational photos" type="text" value={this.state.name}/>
-                     <button class="main_btn" style={{borderRadius:'5px', height:'5vh', width:'9vw', marginBottom:'10px'}}>Search</button>
+                     <button className="main_btn" style={{borderRadius:'5px', height:'5vh', width:'9vw', marginBottom:'10px'}}>Search</button>
                         </div>
                             
                   
@@ -78,7 +78,7 @@ class GetPhotos extends Component {
 
             </div>
                     {this.state.photos.photos?.length > 0 && (
-          <button class="main_btn" style={{borderRadius:'5px', height:'5vh', width:'9vw', marginBottom:'10px'}} onClick={this.clearPhotoSearch}>Clear</button>
+          <button className="main_btn" style={{borderRadius:'5px', height:'5vh', width:'9vw', marginBottom:'10px'}} onClick={this.clearPhotoSearch}>Clear</button>
         )}
 
 
