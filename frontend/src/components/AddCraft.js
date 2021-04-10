@@ -67,13 +67,13 @@ handleChange = (e)=>{
     render() {
         return (
           <>
-    <section class="banner_area">
-      <div class="banner_inner d-flex align-items-center">
-        <div class="container">
+    <section className="banner_area">
+      <div className="banner_inner d-flex align-items-center">
+        <div className="container">
           <div
-            class="banner_content d-md-flex justify-content-center align-items-center"
+            className="banner_content d-md-flex justify-content-center align-items-center"
           >
-            <div class="mb-3 mb-md-0">
+            <div className="mb-3 mb-md-0">
               <h2>Post Craft</h2>
             </div>
             
@@ -83,30 +83,30 @@ handleChange = (e)=>{
     </section>
 
 
-          <div class="row" style={{display:'flex', flexDirection:'row', justifyContent:'center', marginTop:'10vh'}}>
+          <div className="row" style={{display:'flex', flexDirection:'row', justifyContent:'center', marginTop:'10vh'}}>
 
-          <form class="form-contact contact_form" onSubmit={e => this.handleSubmit(e)}>
-                      <div class="media-body" style={{marginBottom:'7vh'}}>
+          <form className="form-contact contact_form" onSubmit={e => this.handleSubmit(e)}>
+                      <div className="media-body" style={{marginBottom:'7vh'}}>
                               {!this.props.user.email && <h4>To post crafts, you must <Link to='/auth'>log in</Link>.</h4>}
                         </div>
 
 
 
-          <div class="row" >
-            <div class="col-sm-6">
-              <div class="form-group">
-                <input class="form-control" placeholder='Enter title' type='text' name='title' value={this.state.title} onChange={(e)=> this.handleChange(e)}/>
+          <div className="row" >
+            <div className="col-sm-6">
+              <div className="form-group">
+                <input className="form-control" placeholder='Enter title' type='text' name='title' value={this.state.title} onChange={(e)=> this.handleChange(e)}/>
               </div>
             </div>
             
-            <div class="col-sm-6">
-              <div class="form-group">
+            <div className="col-sm-6">
+              <div className="form-group">
                 <input  type='file' onChange={(e)=> this.handleFileUpload(e)} placeholder="Add photo"/>
               </div>
             </div>
-            <div class="col-12">
-              <div class="form-group">
-                  <textarea class="form-control w-100" name='description' value={this.state.description} onChange={(e)=> this.handleChange(e)} cols="30" rows="9" placeholder="Enter description"></textarea>
+            <div className="col-12">
+              <div className="form-group">
+                  <textarea className="form-control w-100" name='description' value={this.state.description} onChange={(e)=> this.handleChange(e)} cols="30" rows="9" placeholder="Enter description"></textarea>
               </div>
             </div>
             
@@ -114,35 +114,20 @@ handleChange = (e)=>{
               
           
                     
-                        <div class="media-body">
+                        <div className="media-body">
   
                                 <h4>{this.state.message}</h4>
                           
                         </div>
                   
 
-          <div class="form-group mt-3">
-            <button type="submit" class="button button-contactForm">Post Craft</button>
+          <div className="form-group mt-3">
+            <button type="submit" className="button button-contactForm">Post Craft</button>
           </div>
         </form>
         </div>
           </>
 
-
-            // <form onSubmit={e => this.handleSubmit(e)}>
-            // {!this.props.user.email && <div>To add craft, you must <Link to='/auth'>log in</Link>.</div>}
-            // <label> TITLE:
-            // <input type='text' name='title' value={this.state.title} onChange={(e)=> this.handleChange(e)}/>
-            // </label>
-            // <label> DESCRIPTION:
-            // <textarea name='description' value={this.state.description} onChange={(e)=> this.handleChange(e)}/>
-            // </label>
-            // <label> IMAGE:
-            // <input type='file' onChange={(e)=> this.handleFileUpload(e)}/>
-            // </label>
-            // <p>{this.state.message}</p>
-            //     <button type='submit'>Add craft</button>
-            // </form>
         )
     }
 }
