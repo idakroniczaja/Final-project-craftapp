@@ -20,33 +20,7 @@ class AllCrafts extends React.Component {
 
     return this.state.crafts.map((each) => {
       return (
-        // <li key={each._id}>
-        //   <Link to={`/crafts/${each._id}`}>{each.title}</Link>
-        //   <img src={each.imageUrl} alt={each.title} width="200vw" />
-        //   <p>{each.comments.length}</p>
-        // </li>
-
-
-    //     <div class="col-md-6 col-xl-4 single-blog" style={{padding:'20px'}}>
-    //     <div class="single-category">
-    //         <div class="thumb">
-    //             <img class="img-fluid" src={each.imageUrl} alt=""/>
-    //         </div>
-    //         <div class="short_details" style={{boxShadow:'5px 10px #FF8888 ', height:'20vh'}}>
-    //             <div class="meta-top d-flex">
-    //           {each.title}
-    //                 <p> {each.createdAt}</p>
-    //             </div>
-    //             <a class="d-block" href="single-blog.html">
-    //             <Link to={`/crafts/${each._id}`}><h4>{each.title.split('')[0].toUpperCase()+each.title.slice(1)}</h4></Link>
-    //             </a>
-    //             <div class="meta-bottom d-flex">
-    //                 <p><i class="ti-comment"></i>{each.comments.length}</p>
-                
-    //             </div>
-    //         </div>
-    //     </div> 
-    // </div>
+       
 
     <div key={each._id} className='gridBox single-blog'>
 
@@ -55,7 +29,7 @@ class AllCrafts extends React.Component {
     
     <h3 style={{marginTop:'4vh', color:'gray'}}>{each.title.split('')[0].toUpperCase()+each.title.slice(1)}</h3>
 
-      <p class="ti-comment">   {each.comments.length}</p>
+      <p className="ti-comment">   {each.comments.length}</p>
       </div>
 
       );
@@ -108,21 +82,6 @@ class AllCrafts extends React.Component {
               
             </div>
 
-   
-
-       
-          
-
-        {/* <form onSubmit={this.showFiltered}>
-          <input
-            onChange={this.search}
-            name="title"
-            placeholder="search"
-            type="text"
-          />
-
-          <button onClick={(e) => e.target.reset}>Clear search</button>
-        </form> */}
       </>
     );
   }
