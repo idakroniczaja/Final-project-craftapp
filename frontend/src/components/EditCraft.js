@@ -36,26 +36,26 @@ service.editCraft(this.props.theCraft._id, this.state)
       <div>
 
 <div class="col-12">
-          <h2 class="contact-title">Edit your post:</h2>
+          <h2 className="contact-title">Edit your post:</h2>
         </div>
         <div >
-          <form class="form-contact contact_form" onSubmit={this.handleFormSubmit}>
-            <div class="row">
+          <form className="form-contact contact_form" onSubmit={this.handleFormSubmit}>
+            <div className="row">
 
-              <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" type="text" name="title" value={this.state.title} onChange={e => this.handleChangeTitle(e)}/>
+              <div className="col-12">
+                <div className="form-group">
+                  <input className="form-control" type="text" name="title" value={this.state.title} onChange={e => this.handleChangeTitle(e)}/>
                 </div>
               </div>
 
-              <div class="col-12">
-                <div class="form-group">
-                    <textarea class="form-control w-100" cols="30" rows="9" name="description" value={this.state.description} onChange={e => this.handleChangeDesc(e)}></textarea>
+              <div className="col-12">
+                <div className="form-group">
+                    <textarea className="form-control w-100" cols="30" rows="9" name="description" value={this.state.description} onChange={e => this.handleChangeDesc(e)}></textarea>
                 </div>
               </div>
             
             </div>
-            <button  class="main_btn" style={{borderRadius:'5px', height:'5vh', width:'9vw', marginBottom:'10px'}} >Submit</button>
+            <button  className="main_btn" style={{borderRadius:'5px', height:'5vh', width:'9vw', marginBottom:'10px'}} >Submit</button>
           
           </form>
 
@@ -63,16 +63,6 @@ service.editCraft(this.props.theCraft._id, this.state)
         </div>
 
 
-        {/* <hr />
-        <h3>Edit form</h3>
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Title:</label>
-          <input type="text" name="title" value={this.state.title} onChange={e => this.handleChangeTitle(e)}/>
-          <label>Description:</label>
-          <textarea name="description" value={this.state.description} onChange={e => this.handleChangeDesc(e)} />
-          
-          <input type="submit" value="Submit" />
-        </form> */}
       </div>
     )
   }
