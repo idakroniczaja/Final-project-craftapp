@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as service from "../../api/service";
+import {Link} from 'react-router-dom'
 
 
  class AddComment extends Component {
@@ -56,6 +57,7 @@ this.setState({
 
            <div className="comment-form" >
                     <h4>Leave a Comment</h4>
+                    {!this.props.user && <h5>To comment, you must <Link to='/auth'>log in</Link>.</h5>}
                     <form className="form-contact comment_form" onSubmit={this.handleSubmit}>
                         <div className="row">
                             <div className="col-12">
