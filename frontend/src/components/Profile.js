@@ -75,7 +75,7 @@ showSearchResultsForEvent = ()=>{
         return (
                             <li key={each.id} class="nav-item submenu dropdown">
                             
-                                 <h4 class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{each.title}</h4>
+                                 <h4 className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{each.title}</h4>
                                  <p>{this.turnDate(each.start)}</p> 
                                  <p>Category: {each.category}</p>
                                  
@@ -84,8 +84,8 @@ showSearchResultsForEvent = ()=>{
                                  || <p>No address provided.</p>
                                  }
                              
-                                <ul class="dropdown-menu">
-                                    <li class="nav-item">Category: {each.description}</li>
+                                <ul className="dropdown-menu">
+                                    <li className="nav-item">Category: {each.description}</li>
                                      
                                 </ul>
                             
@@ -153,20 +153,20 @@ showMyFirstThreeCrafts = () => {
   .map((each) => {
       return (
           <>      
-        <div class="blog_item_img">
-                          <img class="card-img rounded-0" src={each.imageUrl} alt=""/>
-                          <a href="#" class="blog_item_date">
+        <div className="blog_item_img">
+                          <img className="card-img rounded-0" src={each.imageUrl} alt=""/>
+                          <a href="#" className="blog_item_date">
                             <h3>{each.createdAt.split('T')[0].split('-')[2]}</h3>
                             <p>{this.turnMonth(each.createdAt)}</p>
                             </a>
                         </div>
                         
-                        <div class="blog_details">
-                            <a class="d-inline-block" >
+                        <div className="blog_details">
+                            <a className="d-inline-block" >
                                 <Link to={`/crafts/${each._id}`}><h2 key={each._id}>{each.title}</h2></Link>
                             </a>
                             <p>{each.description}</p>
-                            <ul class="blog-info-link">
+                            <ul className="blog-info-link">
                               <li><a href="#"><i class="far fa-comments"></i> {each.comments.length}</a></li>
                               <li><button  onClick={()=>this.deleteCraft(each._id)} class="main_btn" style={{borderRadius:'5px'}}>Delete</button></li>
                             </ul>    
@@ -190,12 +190,12 @@ showMyCraftsBottom = () => {
                             <h3>{each.createdAt.split('T')[0].split('-')[2]}</h3>
                           
                         <div >
-                        <a class="d-inline-block" href="single-blog.html">
+                        <a className="d-inline-block" href="single-blog.html">
                                 <Link   to={`/crafts/${each._id}`}><h2 key={each._id}>{each.title}</h2></Link>
                             </a>
                             <p className='text'>{each.description}</p>
-                            <ul class="blog-info-link" style={{display:'flex', justifyContent:'space-between'}}>
-                              <li><i class="far fa-comments"></i> {each.comments.length}</li>
+                            <ul className="blog-info-link" style={{display:'flex', justifyContent:'space-between'}}>
+                              <li><i className="far fa-comments"></i> {each.comments.length}</li>
                               <li><button  onClick={()=>this.deleteCraft(each._id)} class="main_btn" style={{borderRadius:'5px'}}>Delete</button></li>
                             </ul>    
                             
@@ -233,12 +233,12 @@ showBestCrafts =()=>{
   .filter((each, index)=>index<4)
   .map(each=>{
     return (
-      <div class="media post_item">
+      <div className="media post_item">
                               <img src={each.imageUrl} width='100vw' alt="post"/>
-                              <div class="media-body">
+                              <div className="media-body">
                                   
                                   <Link to={`/crafts/${each._id}`}><h3 key={each._id}>{each.title}</h3></Link>
-                                  <p><i class="far fa-comments"></i>{each.comments.length}</p>
+                                  <p><i className="far fa-comments"></i>{each.comments.length}</p>
                                   <p>{this.turnDate(each.createdAt)}</p>
                               </div>
                           </div>
@@ -267,13 +267,13 @@ showBestCrafts =()=>{
   
     return (
       <div>
-<section class="banner_area">
-      <div class="banner_inner d-flex align-items-center">
-        <div class="container">
+<section className="banner_area">
+      <div className="banner_inner d-flex align-items-center">
+        <div className="container">
           <div
-            class="banner_content d-md-flex justify-content-center align-items-center"
+            className="banner_content d-md-flex justify-content-center align-items-center"
           >
-            <div class="mb-3 mb-md-0">
+            <div className="mb-3 mb-md-0">
               <h2>Your profile</h2>
             </div>
           </div>
@@ -283,7 +283,7 @@ showBestCrafts =()=>{
 
 
 
-<div class="col-12 " style={{display:'flex', justifyContent:'center', alignItems:'center', height:'10vh'}}>
+<div className="col-12 " style={{display:'flex', justifyContent:'center', alignItems:'center', height:'10vh'}}>
                     <button class="main_btn" onClick={this.logOut}>Log out <span class="ti-angle-double-right"></span></button>
     </div>
            
@@ -294,51 +294,38 @@ showBestCrafts =()=>{
  
 
 
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-8 mb-5 mb-lg-0">
-                  <div class="blog_left_sidebar">
+      <div className="container">
+          <div className="row">
+              <div className="col-lg-8 mb-5 mb-lg-0">
+                  <div className="blog_left_sidebar">
 
 
-                      <article class="blog_item">
+                      <article className="blog_item">
                      {this.showMyFirstThreeCrafts()}
 
                       </article>
                  
-                    
-                      
-
-
-                      {/* <nav class="blog-pagination justify-content-center d-flex">
-                          <ul class="pagination">
-                              
-                        <ShowAll showNext={this.showMyCraftsBottom} />
-                        
-                       
-                              
-                          </ul>
-                      </nav> */}
-                                 
+              
 
                   </div>
               </div>
-              <div class="col-lg-4">
-                  <div class="blog_right_sidebar">
-                      <aside class="single_sidebar_widget search_widget">
+              <div className="col-lg-4">
+                  <div className="blog_right_sidebar">
+                      <aside className="single_sidebar_widget search_widget">
 
                      
 
                           <form onSubmit={this.getEvent}>
-                            <div class="form-group">
-                              <div class="input-group mb-3">
-                                <input onChange={this.search} type="text" class="form-control" placeholder="place" name="place"/>
-                                <input onChange={this.search} type="text" class="form-control" placeholder="event" name="event"/>
-                                <div class="input-group-append">
-                                  <button class="btn" type="button"><i class="ti-search"></i></button>
+                            <div className="form-group">
+                              <div className="input-group mb-3">
+                                <input onChange={this.search} type="text" className="form-control" placeholder="place" name="place"/>
+                                <input onChange={this.search} type="text" className="form-control" placeholder="event" name="event"/>
+                                <div className="input-group-append">
+                                  <button className="btn" type="button"><i className="ti-search"></i></button>
                                 </div>
                               </div>
                             </div>
-                            <button class="button rounded-0 primary-bg text-white w-100" type="submit">Search</button>
+                            <button className="button rounded-0 primary-bg text-white w-100" type="submit">Search</button>
                           </form>
 
                     
@@ -346,35 +333,35 @@ showBestCrafts =()=>{
 
                       </aside>
 
-                      <aside class="single_sidebar_widget post_category_widget">
+                      <aside className="single_sidebar_widget post_category_widget">
 
                         {this.state.events.length>0 &&
                         <>
-                           <button onClick={this.clearEventSearch} class="main_btn" style={{borderRadius:'5px', marginBottom:'2vw'}}>Clear search</button>
-                           <h4 class="widget_title">We found {this.state.events.length} {this.event.toUpperCase()} events in {this.place.includes(' ') &&
+                           <button onClick={this.clearEventSearch} className="main_btn" style={{borderRadius:'5px', marginBottom:'2vw'}}>Clear search</button>
+                           <h4 className="widget_title">We found {this.state.events.length} {this.event.toUpperCase()} events in {this.place.includes(' ') &&
                            this.place.split(' ').map(each=>each.charAt(0).toUpperCase()+each.slice(1)).join(' ')
                            ||
                              this.place.split('')[0].toUpperCase()+this.place.slice(1)} for this month</h4>
                         </> ||
-                        <h4 class="widget_title">Next month events</h4>
+                        <h4 className="widget_title">Next month events</h4>
 }
                         
-                        <ul class="list cat-list">
+                        <ul className="list cat-list">
                             {this.showSearchResultsForEvent()}
                         </ul>
                          
                       </aside>
 
-                      <aside class="single_sidebar_widget popular_post_widget">
-                          <h3 class="widget_title">Posts with most comments:</h3>
+                      <aside className="single_sidebar_widget popular_post_widget">
+                          <h3 className="widget_title">Posts with most comments:</h3>
                                 {this.showBestCrafts()}
 
                           
                    
                       </aside>
-                      <aside class="single_sidebar_widget tag_cloud_widget">
-                          <h4 class="widget_title">You have {this.state.crafts.length} posts</h4>
-                          <ul class="list">
+                      <aside className="single_sidebar_widget tag_cloud_widget">
+                          <h4 className="widget_title">You have {this.state.crafts.length} posts</h4>
+                          <ul className="list">
                           {this.allMyPosts()}
                               
                               
@@ -382,10 +369,10 @@ showBestCrafts =()=>{
                       </aside>
 
 
-                      <aside class="single_sidebar_widget instagram_feeds">
-                        <h4 class="widget_title">Inspirational photograpy:</h4>
+                      <aside className="single_sidebar_widget instagram_feeds">
+                        <h4 className="widget_title">Inspirational photograpy:</h4>
                        
-                        <ul class="instagram_row flex-wrap ">
+                        <ul className="instagram_row flex-wrap ">
                         {this.showCuratedPhotos()}
                            
                             
@@ -397,63 +384,13 @@ showBestCrafts =()=>{
                   </div>
               </div>
           </div>
-      <nav style={{margin:'0'}} class="blog-pagination justify-content-center d-flex">
-                          <ul class="pagination">
+      <nav style={{margin:'0'}} className="blog-pagination justify-content-center d-flex">
+                          <ul className="pagination">
                         <ShowAll showNext={this.showMyCraftsBottom} />
                           </ul>
                       </nav>
       </div>
   </section>
-
-
-
-
-        {/* Profile
-        <br />
-        
-        
-       
-
-        <br></br>
-
-<form onSubmit={this.getEvent}>
-
-        <input
-          onChange={this.search}
-          name="place"
-          placeholder="place"
-          type="text"
-        />
-
-       <input
-          onChange={this.search}
-          name="event"
-          placeholder="event"
-          type="text"
-        />   
-
-<button>Search</button>
-</form>
-
-{this.state.events.length>0 &&
-     <button onClick={this.clearEventSearch}>Clear</button>
-}
-        <div>
-     {this.showSearchResultsForEvent()}
-       </div> 
-
- */}
-
-
-      
-    
-
-
-
-       
-
-
-
 
       </div>
     );
