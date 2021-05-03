@@ -53,6 +53,8 @@ handleFileUpload = e => {
         console.log('Error while uploading the file: ', err);
       });
 }
+
+
 handleChange = (e)=>{
     const {name, value} = e.target
     this.setState({
