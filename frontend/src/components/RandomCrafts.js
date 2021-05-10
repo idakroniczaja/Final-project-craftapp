@@ -14,6 +14,8 @@ class RandomCrafts extends React.Component{
         service
         .showRandomCrafts()
         .then((response)=>{
+   
+            // console.log(response.data)
          this.setState({
              crafts:response.data
          })
@@ -24,12 +26,17 @@ class RandomCrafts extends React.Component{
         
     }
 
+loading= ()=>{
+    return(
+        <div>Loading.....</div>
+    )
+}
 
     showFilteredCrafts=()=>{
         let sorted1 = [...this.state.crafts].sort((a,b)=>b.comments?.length-a.comments?.length).filter((elem,i)=>i===0)
         let sorted2 = [...this.state.crafts].sort((a,b)=>b.comments?.length-a.comments?.length).filter((elem,i)=>i===1)
         let sorted3 = [...this.state.crafts].sort((a,b)=>b.comments?.length-a.comments?.length).filter((elem,i)=>i===2)
-       console.log(sorted1, sorted2,sorted3)
+     
             
                 return(
                     <>
@@ -125,7 +132,8 @@ class RandomCrafts extends React.Component{
 
 
         <div class="row">
-        {this.showFilteredCrafts()}
+        {this.state.crafts.length===0 && <>{this.loading()}</> || this.showFilteredCrafts()}
+    
             </div>
 
 
