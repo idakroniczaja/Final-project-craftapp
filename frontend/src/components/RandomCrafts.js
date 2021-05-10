@@ -28,7 +28,10 @@ class RandomCrafts extends React.Component{
 
 loading= ()=>{
     return(
-        <div>Loading.....</div>
+        <div className="loadingio-spinner-bars-pxwyvu3ouwq"><div className="ldio-68t2ax9fux">
+        ...Loading...
+            <div></div><div></div><div></div><div></div>
+        </div></div>            
     )
 }
 
@@ -120,20 +123,20 @@ loading= ()=>{
             <>
   
             
-            <section class="editors_pick area-padding">
-        <div class="container">
+            <section className="editors_pick area-padding">
+        <div className="container">
 
-            <div class="row">
-                <div class="area-heading">
+            <div className="row">
+                <div className="area-heading">
                     <h3>Our Picks for you</h3>
                     <p>Posts with highest number of comments:</p>
                 </div>
             </div>
 
 
-        <div class="row">
+        <div className="row" style={{display:'flex', justifyContent:'center'}}>
         {this.state.crafts.length===0 && <>{this.loading()}</> || this.showFilteredCrafts()}
-    
+     
             </div>
 
 
