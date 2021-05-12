@@ -298,12 +298,43 @@ showBestCrafts =()=>{
           <div className="row">
               <div className="col-lg-8 mb-5 mb-lg-0">
                   <div className="blog_left_sidebar">
+                  {this.state.crafts.length===0 && <div style={{  
+                                            textAlign:'center',
+                                            color:'#555',
+                                            fontWeight:'300',
+                                            fontSize:'32px',
+                                            height:'80vh',
+                                            display:'flex',
+                                            flexDirection:'column',
+                                            justifyContent:'center',
+                                            alignItems:'center'
+                                            }}> 
+                                            <div style={{
+                                              overflow:'hidden',
+                                              animation: 'showup 7s',
+                                              padding:'15%',
+                                              marginBottom:'0'
+
+                                            }}>Dear {this.props.user.email}, thank you for joining your creative community!</div>
+                                            <div style={{
+                  
+                                              overflow:'hidden',
+                                              animation: 'reveal 7s',
+                                              padding:'15%',
+                                              marginTop:'0'
+                                              
+                              
+                                            }}>
+                                            <span style={{
+                                              width:'50vw',
+                                              animation: 'slidein 7s infinite'
+                                            }}>Your profile is empty, please click <Link to='/crafts/create'>here</Link> to post a craft.</span>
+                                            </div> </div>
+           
+                  || <article className="blog_item">{this.showMyFirstThreeCrafts()}</article>}
 
 
-                      <article className="blog_item">
-                     {this.showMyFirstThreeCrafts()}
-
-                      </article>
+                      
                  
               
 
